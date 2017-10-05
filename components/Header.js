@@ -19,5 +19,4 @@ const Header = () => (
   </Navbar>
 );
 
-//ReactDOM.render(navbarInstance, mountNode);
 module.exports = Header;
