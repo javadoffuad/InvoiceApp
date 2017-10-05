@@ -1,12 +1,16 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Button } from 'react-bootstrap';
-
 import Header from '../components/Header';
+import Invoices from '../components/Invoices/List';
 
 class Layout extends React.Component {
 	render() {
-		return <Header/>
+		return(
+			<div>
+				<Header/>
+				<Invoices/>
+			</div>
+		)
 	}
 }
 
