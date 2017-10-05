@@ -2,5 +2,11 @@ import React from 'react';
 import { render } from 'react-dom';
 
 import 'react-select/dist/react-select.css';
+import { Button } from 'react-bootstrap';
 
-render(<div>Place your application here</div>, document.getElementById('app-root'));
+import Layout from '../components/Layout';
+
+render(
+    <Layout/>,
+    document.getElementById('app-root')
+);
