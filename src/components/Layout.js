@@ -7,11 +7,11 @@ import {
 	Switch
 } from 'react-router-dom';
 
-import Header from './components/Header';
-import Invoices from './components/Invoices/List';
-import Customers from './components/Customers/List';
-import Products from './components/Products/List';
-import NoMatch from './components/Error';
+import Header from './Header';
+import Invoices from './Invoices/List';
+import Customers from './Customers/List';
+import Products from './Products/List';
+import NoMatch from './Error';
 
 class Layout extends React.Component {
 	render() {
