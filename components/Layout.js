@@ -11,7 +11,7 @@ import Header from '../components/Header';
 import Invoices from '../components/Invoices/List';
 import Customers from '../components/Customers/List';
 import Products from '../components/Products/List';
-import Error from '../components/Error';
+import NoMatch from '../components/Error';
 
 class Layout extends React.Component {
 	render() {
@@ -23,7 +23,7 @@ class Layout extends React.Component {
 						<Route exact path="/" component={Invoices} />
 						<Route path="/products" component={Products} />
 						<Route path="/customers" component={Customers} />
-						<Route path="*" component={Error} />
+						<Route component={NoMatch}/>
 					</Switch>
 				</div>
 			</Router>
