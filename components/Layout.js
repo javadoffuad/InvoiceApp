@@ -18,13 +18,11 @@ class Layout extends React.Component {
 		return(
 			<Router>
 				<div>
-					
 					<Header/>
-
 					<Switch>
 						<Route exact path="/" component={Invoices} />
-						<Route path="/customers" component={Customers} />
 						<Route path="/products" component={Products} />
+						<Route path="/customers" component={Customers} />
 						<Route path="*" component={Error} />
 					</Switch>
 				</div>
