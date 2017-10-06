@@ -13,7 +13,6 @@ import Customers from '../components/Customers/List';
 import Products from '../components/Products/List';
 import NoMatch from '../components/Error';
 
-
 class Layout extends React.Component {
 	render() {
 		return(
