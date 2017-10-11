@@ -8,7 +8,10 @@ import { Col } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { Table } from 'react-bootstrap';
 
-class Title extends React.Component {
+class InvoicesPage extends React.Component {
+    componentDidMount() {
+		document.title = "InvoiceApp | Invoices";
+	}
     render() {
         console.log(this.props.invoices);
         return(
@@ -53,4 +56,4 @@ export default connect(
 	state => ({
 		invoices: state.invoiceReducer
 	})
-)(Title);
+)(InvoicesPage);

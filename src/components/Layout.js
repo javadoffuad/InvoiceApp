@@ -8,9 +8,10 @@ import {
 } from 'react-router-dom';
 
 import Header from './Header';
-import Invoices from './Invoices/List';
-import Customers from './Customers/List';
-import Products from './Products/List';
+import InvoicesPage from './Invoices/InvoicesPage';
+import InvoiceEdit from './Invoices/InvoiceEdit';
+import CustomersPage from './Customers/CustomersPage';
+import ProductsPage from './Products/ProductsPage';
 import NoMatch from './Error';
 
 export default class Layout extends React.Component {
@@ -20,9 +21,11 @@ export default class Layout extends React.Component {
 				<div>
 					<Header/>
 					<Switch>
-						<Route exact path="/" component={Invoices} />
-						<Route path="/products" component={Products} />
-						<Route path="/customers" component={Customers} />
+						<Route exact path="/" component={InvoicesPage} />
+						<Route exact path="/invoices" component={InvoicesPage} />
+						<Route exact path="/invoices/:id/edit" component={InvoiceEdit} />
+						<Route path="/products" component={ProductsPage} />
+						<Route path="/customers" component={CustomersPage} />
 						<Route component={NoMatch}/>
 					</Switch>
 				</div>
