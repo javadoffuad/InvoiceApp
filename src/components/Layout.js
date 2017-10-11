@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { connect } from 'react-redux';
 import {
 	BrowserRouter as Router,
 	Route,
@@ -15,6 +16,7 @@ import NoMatch from './Error';
 
 class Layout extends React.Component {
 	render() {
+		console.log(this.props.invoices);
 		return(
 			<Router>
 				<div>
@@ -31,4 +33,8 @@ class Layout extends React.Component {
 	}
 }
 
-module.exports = Layout;
+export default connect(
+	state => ({
+		invoices: state.invoiceReducer
+	})
+)(Layout);

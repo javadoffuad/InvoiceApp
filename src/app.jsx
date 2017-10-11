@@ -1,10 +1,17 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Layout from './components/Layout';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-import 'react-select/dist/react-select.css';
+import Layout from './components/Layout';
+import reducer from './reducers';
+//import 'react-select/dist/react-select.css';
+
+const store = createStore(reducer);
 
 render(
-    <Layout/>,
+    <Provider store={store}>
+        <Layout/>
+    </Provider>,
     document.getElementById('app-root')
 );
