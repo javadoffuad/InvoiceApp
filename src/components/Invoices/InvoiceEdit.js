@@ -1,11 +1,8 @@
 import React from 'react';
-import { render } from 'react-dom';
 
-import { Grid } from 'react-bootstrap';
-import { Row } from 'react-bootstrap';
-import { Col } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
-import { Table } from 'react-bootstrap';
+import {
+    Grid, Row, Col, Button, Table
+ } from 'react-bootstrap';
 
 export default ({ match }) => (
     <Grid>

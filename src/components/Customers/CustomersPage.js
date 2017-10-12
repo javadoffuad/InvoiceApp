@@ -1,13 +1,8 @@
 import React from 'react';
-import { render } from 'react-dom';
 import { connect } from 'react-redux';
 
 import {
-    Grid,
-    Row,
-    Col,
-    Button,
-    Table
+    Grid, Row, Col, Button, Table
 } from 'react-bootstrap';
 
 class CustomersPage extends React.Component {

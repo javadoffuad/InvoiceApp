@@ -1,14 +1,9 @@
 import React from 'react';
-import { render } from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import {
-    Grid,
-    Row,
-    Col,
-    Button,
-    Table
+    Grid, Row, Col, Button, Table
 } from 'react-bootstrap';
 
 class InvoicesPage extends React.Component {
@@ -21,7 +16,7 @@ class InvoicesPage extends React.Component {
             <Grid>
                 <Row>
                     <Col md={12}>
-                        <h1>Invoices list <Link to="/invoices/new">Create</Link></h1>
+                        <h1>Invoices list <Button>Create</Button></h1>
                     </Col>
                 </Row>
                 <Row>

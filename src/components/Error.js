@@ -1,9 +1,7 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { Grid } from 'react-bootstrap';
-import { Row } from 'react-bootstrap';
-import { Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import {
+    Grid, Row, Col, Link
+} from 'react-bootstrap';
 
 const Container = () => (
     <Grid>

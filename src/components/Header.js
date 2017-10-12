@@ -5,9 +5,9 @@ import {
   LinkContainer
 } from 'react-router-bootstrap'
 
-import { Navbar } from 'react-bootstrap';
-import { Nav } from 'react-bootstrap';
-import { NavItem } from 'react-bootstrap';
+import {
+  Navbar, NavItem, Nav
+} from 'react-bootstrap';
 
 const Header = () => (
   <Navbar>
