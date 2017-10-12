@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import {
     Grid,
@@ -15,12 +16,12 @@ class InvoicesPage extends React.Component {
 		document.title = "InvoiceApp | Invoices";
 	}
     render() {
-        //console.log(this.props.invoices);
+        console.log(this.props.invoices);
         return(
             <Grid>
                 <Row>
                     <Col md={12}>
-                        <h1>Invoices list <Button>Create</Button></h1>
+                        <h1>Invoices list <Link to="/invoices/new">Create</Link></h1>
                     </Col>
                 </Row>
                 <Row>
@@ -31,17 +32,20 @@ class InvoicesPage extends React.Component {
                                     <th>#</th>
                                     <th>Customer</th>
                                     <th>Discount</th>
-                                    <th colSpan={2}>Total</th>
+                                    <th>Total</th>
+                                    <th colSpan={2}>Created</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
                                     this.props.invoices.map((item, index) =>
-                                        <tr key={index}>
-                                            <td>{index}</td>
-                                            <td>{item.name}</td>
+                                        <tr key={index + 1}>
+                                            <td>{index + 1}</td>
+                                            <td>{item.customer_id}</td>
                                             <td>{item.discount}</td>
                                             <td>{item.total}</td>
+                                            <td>{item.createdAt}</td>
+                                            <td>edit</td>
                                         </tr>
                                     )
                                 }

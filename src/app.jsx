@@ -1,13 +1,16 @@
 import React from 'react';
 import { render } from 'react-dom';
+import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 
 import Layout from './components/Layout';
-import reducer from './reducers';
+import { loadInvoices } from './actions/invoiceActions';
+
 //import 'react-select/dist/react-select.css';
 
-const store = createStore(reducer);
+const store = configureStore();
+
+store.dispatch(loadInvoices());
 
 render(
     <Provider store={store}>
