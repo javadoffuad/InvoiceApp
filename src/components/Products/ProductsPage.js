@@ -35,8 +35,8 @@ class ProductsPage extends React.Component {
                             <tbody>
                                 {
                                     this.props.products.map((item, index) =>
-                                        <tr key={index}>
-                                            <td>{index}</td>
+                                        <tr key={index + 1}>
+                                            <td>{index + 1}</td>
                                             <td>{item.name}</td>
                                             <td>{item.price}</td>
                                         </tr>

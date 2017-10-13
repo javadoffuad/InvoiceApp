@@ -32,8 +32,8 @@ class CustomersPage extends React.Component {
                             <tbody>
                                 {
                                     this.props.customers.map((item, index) =>
-                                        <tr key={index}>
-                                            <td>{index}</td>
+                                        <tr key={index + 1}>
+                                            <td>{index + 1}</td>
                                             <td>{item.name}</td>
                                             <td>{item.address}</td>
                                             <td>{item.phone}</td>

@@ -1,18 +1,18 @@
 import * as types from './actionTypes';
 import axios from 'axios';
 
-export function loadInvoicesSuccess(invoices){
+export function loadCustomersSuccess(customers){
     return {
-        type: types.LOAD_INVOICES_SUCCESS,
-        invoices
+        type: types.LOAD_CUSTOMERS_SUCCESS,
+        customers
     };
 }
 
-export function loadInvoices() {
+export function loadCustomers() {
     return function(dispatch) {
-        return axios.get('/api/invoices')
+        return axios.get('/api/customers')
         .then(function (response) {
-            dispatch(loadInvoicesSuccess(response.data));
+            dispatch(loadCustomersSuccess(response.data));
         })
         .catch(function (error) {
             return error;
