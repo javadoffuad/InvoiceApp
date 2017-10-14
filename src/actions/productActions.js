@@ -8,6 +8,13 @@ export function loadProductsSuccess(products){
     };
 }
 
+export function createProductSuccess(product) {
+    return {
+      type: types.CREATE_PRODUCT_SUCCESS,
+      product
+    };
+}
+
 export function loadProducts() {
     return function(dispatch) {
         return axios.get('/api/products')
@@ -18,4 +25,19 @@ export function loadProducts() {
             return error;
         });
     }
+}
+
+export function createProduct(product) {
+    return function (dispatch) {
+        return axios.post('/api/products', {
+            name: 'tomato',
+            price: '1000'
+        })
+        .then(function (response) {
+            dispatch(createProductSuccess(response.data));
+        })
+        .catch(function (error) {
+            return error;
+        });
+    };
 }

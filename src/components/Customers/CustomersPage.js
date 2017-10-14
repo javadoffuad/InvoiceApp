@@ -1,16 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import {
     Grid, Row, Col, Button, Table
 } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 class CustomersPage extends React.Component {
     componentDidMount() {
 		document.title = "InvoiceApp | Customers";
 	}
     render() {
-        console.log(this.props.customers);
         return(
             <Grid>
                 <Row>

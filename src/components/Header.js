@@ -17,7 +17,7 @@ const Header = () => (
       </Navbar.Brand>
     </Navbar.Header>
     <Nav>
-      <IndexLinkContainer to="/">
+      <IndexLinkContainer to="/invoices">
         <NavItem>Invoices</NavItem>
       </IndexLinkContainer>
       <LinkContainer to="/products">

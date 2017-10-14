@@ -20,15 +20,14 @@ export default class Layout extends React.Component {
 			<Router>
 				<div>
 					<Header/>
-					<Switch>
-						<Route exact path="/" component={InvoicesPage} />
-						<Route exact path="/invoices" component={InvoicesPage} />
-						<Route exact path="/invoices/new" component={NewInvoicePage} />
-						<Route exact path="/invoices/:id/edit" component={InvoiceEdit} />
-						<Route path="/products" component={ProductsPage} />
-						<Route path="/customers" component={CustomersPage} />
-						<Route component={NoMatch}/>
-					</Switch>
+						<Switch>
+							<Route exact path="/" component={InvoicesPage} />
+							<Route exact path="/invoices" component={InvoicesPage} />
+							<Route path="/invoices/new" component={NewInvoicePage} />
+							<Route path="/invoices/:id/edit" component={InvoiceEdit} />
+							<Route path="/products" component={ProductsPage} />
+							<Route path="/customers" component={CustomersPage} />
+						</Switch>
 				</div>
 			</Router>
 		)
