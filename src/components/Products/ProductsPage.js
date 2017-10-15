@@ -13,11 +13,12 @@ import NewProduct from './NewProduct';
 class ProductsPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {showModal: false};
+        this.state = {lgShow: false};
     }
     componentDidMount() {
 		document.title = "InvoiceApp | Products";
 	}
+    
     render() {
         let lgClose = () => this.setState({ lgShow: false });
 
@@ -51,7 +52,7 @@ class ProductsPage extends React.Component {
                                             <td>{index + 1}</td>
                                             <td>{item.name}</td>
                                             <td>{item.price}</td>
-                                            <td><Link to={`/products/${index}/edit`}>edit</Link></td>
+                                            <td><Link to={`/products/${item.id}/edit`}>edit</Link></td>
                                         </tr>
                                     )
                                 }

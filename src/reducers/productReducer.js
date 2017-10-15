@@ -8,5 +8,11 @@ export default function productReducer(
     if(action.type === types.LOAD_PRODUCTS_SUCCESS){
         return action.products;
     }
+    if(action.type === types.CREATE_PRODUCT_SUCCESS){
+        return [
+            ...state,
+            Object.assign({}, action.product)
+        ]
+    }
     return state;
 }

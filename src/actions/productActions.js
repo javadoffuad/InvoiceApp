@@ -8,7 +8,7 @@ export function loadProductsSuccess(products){
     };
 }
 
-export function createProductSuccess(product) {
+export function newProductSuccess(product) {
     return {
       type: types.CREATE_PRODUCT_SUCCESS,
       product
@@ -27,14 +27,14 @@ export function loadProducts() {
     }
 }
 
-export function createProduct(product) {
+export function newProduct(name, price) {
     return function (dispatch) {
         return axios.post('/api/products', {
-            name: 'tomato',
-            price: '1000'
+            name: name,
+            price: price
         })
         .then(function (response) {
-            dispatch(createProductSuccess(response.data));
+            dispatch(newProductSuccess(response.data));
         })
         .catch(function (error) {
             return error;

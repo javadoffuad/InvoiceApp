@@ -1,37 +1,39 @@
 import React from 'react';
 import {
-    Modal, Button, FormGroup, ControlLabel, HelpBlock, FormControl
+    Modal, Button,
+    FormGroup, ControlLabel, HelpBlock, FormControl
 } from 'react-bootstrap';
-import ProductForm from './productForm';
 import { connect } from 'react-redux';
-//import { createProduct } from '../../actions/productActions';
+import { newProduct } from '../../actions/productActions';
+import ProductForm from './ProductForm';
 
 class NewProduct extends React.Component{
-  createProduct(){
-    console.log(this.nameInput.value);
-    console.log(this.priceInput.value);
-    //this.props.createProduct(this.searchInput.value);
+  constructor(props) {
+      super(props);
+      this.state = {lgShow: false};
   }
+
+  createProduct() {
+    this.props.onCreateProduct(
+        this.name.value,
+        this.price.value
+        );
+        this.props.onHide();
+  }
+  
   render() {
+    let lgClose = () => this.setState({ lgShow: false });
+    
     return (
-      <Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-lg">
+      <Modal show={this.props.show} onHide={this.props.onHide} bsSize="large" aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">New product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          
-            <form>
-              <FormGroup controlId="name">
-                  <ControlLabel>Product name</ControlLabel>
-                  {' '}
-                  <FormControl inputRef={(input) => this.nameInput = input} type="text" placeholder="for example tomates" />
-              </FormGroup>
-              <FormGroup controlId="price">
-                  <ControlLabel>Price</ControlLabel>
-                  {' '}
-                  <FormControl inputRef={(input) => this.priceInput = input} type="text" placeholder="00.0 USD" />
-              </FormGroup>
-          </form>
+            
+          <ProductForm
+            nameRef={(el) => this.name=el}
+            priceRef={(el) => this.price=el}/>
 
         </Modal.Body>
         <Modal.Footer>
@@ -43,4 +45,13 @@ class NewProduct extends React.Component{
   }
 }
 
-export default NewProduct;
+export default connect(
+	state => ({
+		products: state.productReducer
+	}),
+  dispatch => ({
+        onCreateProduct: (name, price) => {
+          dispatch(newProduct(name, price));
+        }
+  })
+)(NewProduct);
