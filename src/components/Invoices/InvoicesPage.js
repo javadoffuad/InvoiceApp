@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-    Grid, Row, Col, Button, Table
+    Grid, Row, Col, Button
 } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import InvoiceList from './InvoiceList';
 

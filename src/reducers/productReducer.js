@@ -14,5 +14,12 @@ export default function productReducer(
             Object.assign({}, action.product)
         ]
     }
+    if(action.type === types.DELETE_PRODUCT_SUCCESS){
+        const newState = Object.assign([], state);
+        const indexOfProductToDelete = state.findIndex(product => {return product.id == action.product.id})
+        newState.splice(indexOfProductToDelete, 1);
+        console.log(newState);
+        return newState;
+    }
     return state;
 }

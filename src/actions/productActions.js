@@ -15,6 +15,13 @@ export function newProductSuccess(product) {
     };
 }
 
+export function deleteProductSuccess(product){
+    return {
+        type: types.DELETE_PRODUCT_SUCCESS,
+        product
+    };
+}
+
 export function loadProducts() {
     return function(dispatch) {
         return axios.get('/api/products')
@@ -35,6 +42,18 @@ export function newProduct(name, price) {
         })
         .then(function (response) {
             dispatch(newProductSuccess(response.data));
+        })
+        .catch(function (error) {
+            return error;
+        });
+    };
+}
+
+export function deleteProduct(product) {
+    return function (dispatch) {
+        return axios.delete('/api/products/' + product.id)
+        .then(function (response) {
+            dispatch(deleteProductSuccess(product));
         })
         .catch(function (error) {
             return error;

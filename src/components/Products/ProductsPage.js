@@ -11,23 +11,30 @@ class ProductsPage extends React.Component {
         super(props);
         this.state = {lgShow: false};
     }
+
     componentDidMount() {
 		document.title = "InvoiceApp | Products";
 	}
+
+    open() {
+        this.setState({ lgShow: true });
+    }
+
+    close() {
+        this.setState({ lgShow: false });
+    }
     
     render() {
-        let lgClose = () => this.setState({ lgShow: false });
-        let lgOpen = () => this.setState({ lgShow: true });
         const products = this.props.products;
 
         return(
             <Grid>
                 <Row>
                     <Col md={12}>
-                        <NewProduct show={this.state.lgShow} onHide={lgClose} />
+                        <NewProduct show={this.state.lgShow} onHide={this.close.bind(this)} />
                         <h1>
                             Product list
-                            <Button onClick={lgOpen}>Create</Button>
+                            <Button onClick={this.open.bind(this)}>Create</Button>
                         </h1>
                     </Col>
                 </Row>

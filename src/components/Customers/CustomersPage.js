@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-    Grid, Row, Col, Button, Table
+    Grid, Row, Col, Button
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import CustomerList from './CustomerList';

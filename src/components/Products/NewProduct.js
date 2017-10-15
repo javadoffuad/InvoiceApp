@@ -1,18 +1,10 @@
 import React from 'react';
-import {
-    Modal, Button,
-    FormGroup, ControlLabel, HelpBlock, FormControl
-} from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { newProduct } from '../../actions/productActions';
 import ProductForm from './ProductForm';
 
 class NewProduct extends React.Component{
-  constructor(props) {
-      super(props);
-      this.state = {lgShow: false};
-  }
-
   createProduct() {
     this.props.onCreateProduct(
         this.name.value,
@@ -21,9 +13,7 @@ class NewProduct extends React.Component{
         this.props.onHide();
   }
   
-  render() {
-    let lgClose = () => this.setState({ lgShow: false });
-    
+  render() {    
     return (
       <Modal show={this.props.show} onHide={this.props.onHide} bsSize="large" aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
