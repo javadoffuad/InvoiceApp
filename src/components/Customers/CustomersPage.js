@@ -4,12 +4,15 @@ import {
     Grid, Row, Col, Button, Table
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import CustomerList from './CustomerList';
 
 class CustomersPage extends React.Component {
     componentDidMount() {
 		document.title = "InvoiceApp | Customers";
 	}
     render() {
+        const customers = this.props.customers;
+
         return(
             <Grid>
                 <Row>
@@ -19,28 +22,7 @@ class CustomersPage extends React.Component {
                 </Row>
                 <Row>
                     <Col md={12}>
-                        <Table responsive>
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Address</th>
-                                    <th colSpan={2}>Phone</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    this.props.customers.map((item, index) =>
-                                        <tr key={index + 1}>
-                                            <td>{index + 1}</td>
-                                            <td>{item.name}</td>
-                                            <td>{item.address}</td>
-                                            <td>{item.phone}</td>
-                                        </tr>
-                                    )
-                                }
-                            </tbody>
-                        </Table>
+                        <CustomerList customers={customers}/>
                     </Col>
                 </Row>
             </Grid>

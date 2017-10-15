@@ -14,9 +14,10 @@ export default ({products}) => {
         </thead>
         <tbody>
             {
-                products.map((product, i) => 
-                  <ProductsListRow key={++i} index={++i} product={product} />
-                )
+                products.map((product, i) => {
+                    product.index = ++i;
+                    return <ProductsListRow key={product.index} product={product} />
+                })
             }
         </tbody>
     </Table>
