@@ -15,7 +15,7 @@ class ProductForm extends React.Component{
                     <FormControl inputRef={this.props.nameRef} defaultValue={product && product.name} type="text" placeholder="for example tomates" />
                 </FormGroup>
                 <FormGroup controlId="price">
-                    <ControlLabel>Price {this.props.mylabel}</ControlLabel>
+                    <ControlLabel>Price</ControlLabel>
                     {' '}
                     <FormControl inputRef={this.props.priceRef} defaultValue={product && product.price} type="text" placeholder="00.0 USD" />
                 </FormGroup>

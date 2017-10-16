@@ -1,7 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import NewProduct from './NewProduct';
-import DeleteConfirm from './DeleteConfirm';
 
 class ProductListRow extends React.Component {
   render() {

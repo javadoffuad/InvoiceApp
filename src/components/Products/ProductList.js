@@ -99,8 +99,7 @@ export default connect(
 		products: state.productReducer
 	}),
     dispatch => ({
-            onDeleteProduct: (product) => {
-                dispatch(deleteProduct(product));
-            }
+            onDeleteProduct: product =>
+                dispatch(deleteProduct(product))
     })
 )(ProductList);

@@ -6,10 +6,11 @@ import ProductForm from './ProductForm';
 
 class EditProduct extends React.Component{
     editProduct() {
+        this.props.product.name = this.name.value
+        this.props.product.price = this.price.value;
+
         this.props.onUpdateProduct(
-            this.props.product.id,
-            this.name.value,
-            this.price.value
+            this.props.product
             );
         this.props.callback();
     }
@@ -41,8 +42,7 @@ export default connect(
 		products: state.productReducer
 	}),
   dispatch => ({
-        onUpdateProduct: (id, name, price) => {
-            dispatch(updateProduct(id, name, price));
-        }
+        onUpdateProduct: product => 
+            dispatch(updateProduct(product))
   })
 )(EditProduct);

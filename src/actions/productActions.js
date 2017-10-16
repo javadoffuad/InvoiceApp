@@ -59,25 +59,24 @@ export function newProduct(name, price) {
 export function deleteProduct(product) {
     return function (dispatch) {
         return axios.delete('/api/products/' + product.id)
-        .then(function (response) {
-            dispatch(deleteProductSuccess(product));
-        })
+        .then(response =>
+            dispatch(deleteProductSuccess(product))
+        )
         .catch(function (error) {
             return error;
         });
     };
 }
 
-export function updateProduct(id, name, price) {
+export function updateProduct(product) {
     return function (dispatch) {
-        return axios.put('/api/products/' + id, {
-            name: name,
-            price: price
+        return axios.put('/api/products/' + product.id, {
+            name: product.name,
+            price: product.price
         })
-        .then(function (response) {
-            console.log("response", response.data)
-            dispatch(updateProductSuccess(response.data));
-        })
+        .then(response => 
+            dispatch(updateProductSuccess(product))
+        )
         .catch(function (error) {
             return error;
         });

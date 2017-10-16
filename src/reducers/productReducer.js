@@ -22,10 +22,11 @@ export default function productReducer(
     if(action.type === types.UPDATE_PRODUCT_SUCCESS){
         const newState = Object.assign([], state);
 
-        const indexOfProductToUpdate = state.findIndex(product =>
+        const indexToUpdate = state.findIndex(product =>
              product.id == action.product.id
         );
-        newState.splice(indexOfProductToUpdate, 1, action.product);
+        
+        newState.splice(indexToUpdate, 1, action.product);
         
         return newState;
     }

@@ -1,14 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-export default ({customer}) => {
-  return (
+class CustomerListRow extends React.Component {
+  render() {
+    const customer = this.props.customer;
+
+    return (
     <tr>
         <td>{customer.index}</td>
         <td>{customer.name}</td>
         <td>{customer.address}</td>
         <td>{customer.phone}</td>
-        <td><Link to={`/customers/${customer.id}/edit`}>edit</Link></td>
+        <td>
+          <a onClick={this.props.editAction} href="#">edit</a>
+          <a onClick={this.props.deleteAction} href="#" style={{color: "red", marginLeft: "20px"}}>delete</a>
+        </td>
     </tr>
-  );
-};
+    );
+  }
+}
+
+export default CustomerListRow;
