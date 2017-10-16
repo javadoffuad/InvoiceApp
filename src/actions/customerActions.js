@@ -72,11 +72,12 @@ export function deleteCustomer(customer) {
 export function updateCustomer(customer) {
     return function (dispatch) {
         return axios.put('/api/customers/' + customer.id, {
-           // name: product.name,
-            //price: product.price
+            name: customer.name,
+            address: customer.address,
+            phone: customer.phone
         })
         .then(response => 
-            dispatch(updateCustomerSuccess(customer))
+            dispatch(updateCustomerSuccess(response.data))
         )
         .catch(function (error) {
             return error;

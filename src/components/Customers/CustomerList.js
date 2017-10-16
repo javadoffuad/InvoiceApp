@@ -2,6 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import CustomerListRow from './CustomerListRow';
+import EditCustomer from './EditCustomer';
 import DeleteConfirm from '../common/DeleteConfirm';
 import { deleteCustomer } from '../../actions/customerActions';
 
@@ -84,6 +85,12 @@ class CustomerList extends React.Component {
                     primaryAction={this.onDelete.bind(this)}
                     show={this.state.showDeleteModal}
                     onHide={deleteModalClose}/>
+
+                <EditCustomer
+                    customer={this.state.preparedItem}
+                    callback={this.onEdit.bind(this)}
+                    show={this.state.showEditModal}
+                    onHide={editModalClose}/>
             </Table>
           );
     }

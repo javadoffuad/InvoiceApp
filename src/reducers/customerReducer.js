@@ -19,5 +19,16 @@ export default function customerReducer(
             customer.id !== action.customer.id
         );
     }
+    if(action.type === types.UPDATE_CUSTOMER_SUCCESS){
+        const newState = Object.assign([], state);
+
+        const indexToUpdate = state.findIndex(customer =>
+            customer.id == action.customer.id
+        );
+        
+        newState.splice(indexToUpdate, 1, action.customer);
+        
+        return newState;
+    }
     return state;
 }
