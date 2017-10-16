@@ -6,7 +6,7 @@ class DeleteConfirm extends React.Component {
         return (
             <Modal show={this.props.show} onHide={this.props.onHide} bsSize="small" aria-labelledby="contained-modal-title-sm">
                 <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-sm">Delete product</Modal.Title>
+                    <Modal.Title id="contained-modal-title-sm">{this.props.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <p>Are you sure?</p>

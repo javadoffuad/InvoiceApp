@@ -41,11 +41,12 @@ export function loadCustomers() {
     }
 }
 
-export function newCustomer(name, price) {
+export function newCustomer(name, address, phone) {
     return function (dispatch) {
         return axios.post('/api/customers', {
             name: name,
-            price: price
+            address: address,
+            phone: phone
         })
         .then(function (response) {
             dispatch(newCustomerSuccess(response.data));

@@ -14,5 +14,10 @@ export default function customerReducer(
             Object.assign({}, action.customer)
         ]
     }
+    if(action.type === types.DELETE_CUSTOMER_SUCCESS){
+        return state.filter(customer => 
+            customer.id !== action.customer.id
+        );
+    }
     return state;
 }

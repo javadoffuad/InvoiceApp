@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import ProductsListRow from './ProductListRow';
-import DeleteConfirm from './DeleteConfirm';
+import DeleteConfirm from '../common/DeleteConfirm';
 import EditProduct from './EditProduct';
 import { deleteProduct } from '../../actions/productActions';
 
@@ -71,15 +71,16 @@ class ProductList extends React.Component {
                 <tbody>
                     {
                         products.map((product, i) => {
-                            product.index = ++i;
+                            const index = ++i;
                             return <ProductsListRow
                                     editAction = {this.editConfirmation.bind(this, product)}
                                     deleteAction = {this.deleteConfirmation.bind(this, product)}
-                                    key={product.index} product={product} />
+                                    key={index} index={index} product={product} />
                         })
                     }
                 </tbody>
                 <DeleteConfirm
+                    title="Delete product"
                     primaryAction={this.onDelete.bind(this)}
                     show={this.state.showDeleteModal}
                     onHide={deleteModalClose}/>

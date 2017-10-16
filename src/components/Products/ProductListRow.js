@@ -6,7 +6,7 @@ class ProductListRow extends React.Component {
 
     return (
       <tr>
-          <td>{product.index}</td>
+          <td>{this.props.index}</td>
           <td>{product.name}</td>
           <td>{product.price}</td>
           <td>

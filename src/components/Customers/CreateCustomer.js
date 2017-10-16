@@ -5,10 +5,11 @@ import { newCustomer } from '../../actions/customerActions';
 import CustomerForm from './CustomerForm';
 
 class CreateCustomer extends React.Component{
-  createProduct() {
-    this.props.onCreateProduct(
+  createCustomer() {
+    this.props.onCreateCustomer(
         this.name.value,
-        this.price.value
+        this.address.value,
+        this.phone.value
         );
         this.props.onHide();
   }
@@ -28,7 +29,7 @@ class CreateCustomer extends React.Component{
 
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.createProduct.bind(this)} bsStyle="primary">Save</Button>
+          <Button onClick={this.createCustomer.bind(this)} bsStyle="primary">Save</Button>
           <Button onClick={this.props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
@@ -41,8 +42,8 @@ export default connect(
 		customers: state.customerReducer
 	}),
   dispatch => ({
-        onCreateCustomer: (name, price) => {
-          dispatch(newCustomer(name, price));
+        onCreateCustomer: (name, address, phone) => {
+          dispatch(newCustomer(name, address, phone));
         }
   })
 )(CreateCustomer);

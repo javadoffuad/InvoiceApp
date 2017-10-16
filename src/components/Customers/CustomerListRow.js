@@ -6,7 +6,7 @@ class CustomerListRow extends React.Component {
 
     return (
     <tr>
-        <td>{customer.index}</td>
+        <td>{this.props.index}</td>
         <td>{customer.name}</td>
         <td>{customer.address}</td>
         <td>{customer.phone}</td>
