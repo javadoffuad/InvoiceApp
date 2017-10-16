@@ -8,7 +8,7 @@ export default ({customer}) => {
         <td>{customer.name}</td>
         <td>{customer.address}</td>
         <td>{customer.phone}</td>
-        <td><Link to={`/products/${customer.id}/edit`}>edit</Link></td>
+        <td><Link to={`/customers/${customer.id}/edit`}>edit</Link></td>
     </tr>
   );
 };

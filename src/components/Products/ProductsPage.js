@@ -9,7 +9,7 @@ import ProductList from './ProductList';
 class ProductsPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {lgShow: false};
+        this.state = {showModal: false};
     }
 
     componentDidMount() {
@@ -17,11 +17,11 @@ class ProductsPage extends React.Component {
 	}
 
     open() {
-        this.setState({ lgShow: true });
+        this.setState({ showModal: true });
     }
 
     close() {
-        this.setState({ lgShow: false });
+        this.setState({ showModal: false });
     }
     
     render() {
@@ -31,7 +31,7 @@ class ProductsPage extends React.Component {
             <Grid>
                 <Row>
                     <Col md={12}>
-                        <NewProduct show={this.state.lgShow} onHide={this.close.bind(this)} />
+                        <NewProduct show={this.state.showModal} onHide={this.close.bind(this)} />
                         <h1>
                             Product list
                             <Button onClick={this.open.bind(this)}>Create</Button>

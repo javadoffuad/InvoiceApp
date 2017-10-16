@@ -15,9 +15,19 @@ export default function productReducer(
         ]
     }
     if(action.type === types.DELETE_PRODUCT_SUCCESS){
-        return state.filter(function(product){
-          return product.id !== action.product.id
-        });
+        return state.filter(product => 
+            product.id !== action.product.id
+        );
+    }
+    if(action.type === types.UPDATE_PRODUCT_SUCCESS){
+        const newState = Object.assign([], state);
+
+        const indexOfProductToUpdate = state.findIndex(product =>
+             product.id == action.product.id
+        );
+        newState.splice(indexOfProductToUpdate, 1, action.product);
+        
+        return newState;
     }
     return state;
 }

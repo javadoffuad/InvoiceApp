@@ -13,7 +13,7 @@ class ProductListRow extends React.Component {
           <td>{product.name}</td>
           <td>{product.price}</td>
           <td>
-            <a href="#">edit</a>
+            <a onClick={this.props.editAction} href="#">edit</a>
             <a onClick={this.props.deleteAction} href="#" style={{color: "red", marginLeft: "20px"}}>delete</a>
           </td>
       </tr>
