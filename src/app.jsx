@@ -8,7 +8,7 @@ import { loadInvoices } from './actions/invoiceActions';
 import { loadProducts } from './actions/productActions';
 import { loadCustomers } from './actions/customerActions';
 
-//import 'react-select/dist/react-select.css';
+import 'react-select/dist/react-select.css';
 
 const store = configureStore();
 

@@ -17,8 +17,8 @@ export default ({invoices}) => {
         <tbody>
             {
                 invoices.map((invoice, i) => {
-                    invoice.index = ++i;
-                    return <InvoiceListRow key={invoice.index} invoice={invoice}/>
+                    const index = ++i;
+                    return <InvoiceListRow key={index} index={index} invoice={invoice}/>
                 })
             }
         </tbody>
