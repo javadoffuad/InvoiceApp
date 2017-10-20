@@ -2,33 +2,19 @@
 
 var path = require('path');
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  devtool: 'source-map',//eval-source-map
+  devtool: 'source-map',
   entry: [
-    './src/app.jsx' //./src/app
+    './src/app.jsx'
   ],
- /* resolve: {
-    root: [
-      path.resolve(__dirname, "src"),
-    ],
-    extensions: ['', '.js', '.jsx', '.css']
-  },*/
   output: {
-    path: path.join(__dirname, 'public'), //'public'
-    filename: 'bundle.js',//bundle.js
-    publicPath: '/public/'//\/public/
+    path: path.join(__dirname, '/public/'),
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: 'src/index.tpl.html',
-      inject: 'body',
-      filename: 'index.html'
-    }),
-    //new webpack.optimize.DedupePlugin(),
-    //new webpack.HotModuleReplacementPlugin(),
-    //new webpack.NoErrorsPlugin(),
+    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
@@ -37,7 +23,9 @@ module.exports = {
       }
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
     })
   ],
   module: {

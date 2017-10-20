@@ -4,12 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    //"clean-public": "npm run remove-public && mkdir public",
-    "remove-public": "node_modules/.bin/rimraf ./public",
-    "build:html": "babel-node tools/buildHtml.js",
-    "prebuild": "npm-run-all clean-public lint build:html",
-    "build": "babel-node tools/build.js",
-    "postbuild": "babel-node tools/publicServer.js"
+    "build": "webpack --config webpack.production.config.js"
   },
   "dependencies": {
     "axios": "^0.16.2",
