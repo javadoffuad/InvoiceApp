@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node server.js",
-    "build": "webpack --config webpack.production.config.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "axios": "^0.16.2",

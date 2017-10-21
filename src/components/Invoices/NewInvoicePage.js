@@ -98,7 +98,7 @@ class NewInvoicePage extends React.Component{
     
     render() {
         var optionsCustomer = [];
-        var optionsProduct = [];
+        var optionsProduct = []; 
 
         this.props.customers.forEach(function(item, i) {
             optionsCustomer.push({
