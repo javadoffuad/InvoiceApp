@@ -10,7 +10,7 @@ class InvoiceEdit extends React.Component{
         this.state = {
             customer: '',
             product: '',
-            productsToOdred: []
+            productsToOrder: []
         }
     }
 

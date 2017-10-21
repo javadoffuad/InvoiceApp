@@ -10,9 +10,9 @@ class NewInvoicePage extends React.Component{
         this.state = {
             selectedCustomer: '',
             selectedProduct: '',
-            productsToOdred: [],
-            total: 0,
-            discount: 3
+            productsToOrder: [],
+            total: (0).toFixed(2),
+            discount: ''
         }
 
         this.sumTotal = this.sumTotal.bind(this);
@@ -20,12 +20,6 @@ class NewInvoicePage extends React.Component{
 
     componentDidMount() {
         document.title = "InvoiceApp | New Invoice";
-    }
-
-    countTotal() {
-        console.log(this.state.productsToOdred);
-       // const sum = this.state.total + this.state.selectedProduct.price * this.state.selectedProduct.count;
-       // console.log(sum/100*this.state.discount);
     }
 
     updateState(element) {
@@ -43,41 +37,71 @@ class NewInvoicePage extends React.Component{
     addProduct(e) {
         if(!this.state.selectedProduct)
             return false;
-
-        //const sum = this.state.selectedProduct.price * this.state.selectedProduct.count;
-
-        //const sum = this.state.total + this.state.selectedProduct.price * this.state.selectedProduct.qty;
-        //console.log("total", sum/100*1);
             
         this.setState({
-            productsToOdred: [...this.state.productsToOdred, this.state.selectedProduct],
-            selectedProduct: '',
-           // total: 0
+            productsToOrder: [...this.state.productsToOrder, this.state.selectedProduct],
+            selectedProduct: ''
+        }, function(){
+            this.sumTotal();
         });
-        //this.sumTotal(this.state.productsToOdred);
     }
 
-    sumTotal(state) {
-        console.log("total", state, this.state.selectedProduct)
-        /*var sum = 0;
-        state.map(function(product){
+    setQty (product, e){
+        product.qty = e.target.value;
+        const newState = Object.assign([], this.state.productsToOrder);
+        
+        const index = this.state.productsToOrder.findIndex(item =>
+                product.id == item.id
+        );
+        newState.splice(index, 1, product);
+        
+        this.setState({
+            products: newState
+        }, function(){
+            this.sumTotal();
+        });
+    }
+
+    updateDiscount(e) {
+        this.setState({
+            discount: e.target.value
+        },function(){
+            this.sumTotal();
+        });
+    }
+
+    sumTotal() {
+        var sum = 0;
+        this.state.productsToOrder.map(function(product){
             sum = sum + product.price * product.qty;
         });
+        sum = this.state.discount > 0
+            ? sum - sum/100 * this.state.discount
+            : sum;
+        
         this.setState({
-            total: sum - sum/100*1
+            total: sum.toFixed(2)
         });
-        console.log(sum - sum/100*1)*/
+    }
+
+    delete(product) {
+        const newState = this.state.productsToOrder.filter(item =>
+            product.id !== item.id
+        );
+        
+        this.setState({
+            productsToOrder: newState
+        }, function(){
+            this.sumTotal();
+        });
     }
     
     render() {
-        
-        this.sumTotal(this.state.productsToOdred);
-
-        var options = [];
+        var optionsCustomer = [];
         var optionsProduct = [];
 
         this.props.customers.forEach(function(item, i) {
-            options.push({
+            optionsCustomer.push({
                     value: item.id,
                     label: item.name
                 })
@@ -85,6 +109,7 @@ class NewInvoicePage extends React.Component{
 
         this.props.products.forEach(function(item, i) {
             optionsProduct.push({
+                    id: i,
                     value: item.id,
                     label: item.name,
                     price: item.price,
@@ -105,19 +130,23 @@ class NewInvoicePage extends React.Component{
                             <ControlLabel>Discount (%)</ControlLabel>
                             <FormControl
                                 type="text"
-                                placeholder="Enter text"/>
+                                onChange={this.updateDiscount.bind(this)}
+                                placeholder="Enter discount"
+                                defaultValue={this.state.discount}/>
                         </FormGroup>
                     </Col>
                 </Row>
                 <Row>
                     <Col md={4}>
-                    <ControlLabel>Customer</ControlLabel>
-                    <Select
-                        name="form-field-name"
-                        value={this.state.selectedCustomer}
-                        options={options}
-                        onChange={this.updateState.bind(this)}
-                        />
+                    <FormGroup controlId="customer">
+                        <ControlLabel>Customer</ControlLabel>
+                        <Select
+                            name="form-field-name"
+                            value={this.state.selectedCustomer}
+                            options={optionsCustomer}
+                            onChange={this.updateState.bind(this)}
+                            />
+                        </FormGroup>
                     </Col>
                 </Row>
                 <Row>
@@ -133,7 +162,7 @@ class NewInvoicePage extends React.Component{
                         </FormGroup>
                     </Col>
                     <Col>
-                        <Button onClick={this.addProduct.bind(this)}>Add</Button>
+                        <Button style={{marginTop: "26px"}} onClick={this.addProduct.bind(this)}>Add</Button>
                     </Col>
                 </Row>
                 <Row>
@@ -143,17 +172,24 @@ class NewInvoicePage extends React.Component{
                                 <tr>
                                     <th>Name</th>
                                     <th>Price</th>
-                                    <th>Qty</th>
+                                    <th colSpan="2">Qty</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    this.state.productsToOdred.map((product, index) => {
+                                    this.state.productsToOrder.map((product, index) => {
                                         return  <tr key={index}>
                                                     <td>{product.label}</td>
                                                     <td>{product.price}</td>
+                                                    <td width="120">
+                                                    <FormControl
+                                                        type="text"
+                                                        onChange={this.setQty.bind(this, product)}
+                                                        placeholder="Enter discount"
+                                                        defaultValue={product.qty}/>
+                                                    </td>
                                                     <td>
-                                                        <input type="text" defaultValue="1"/>
+                                                        <Button onClick={this.delete.bind(this, product)} bsStyle="danger">Delete</Button>
                                                     </td>
                                                 </tr>
                                     })
@@ -163,8 +199,13 @@ class NewInvoicePage extends React.Component{
                     </Col>
                 </Row>
                 <Row>
-                    <Col md={12}>
+                    <Col md={6}>
                         <h1>Total: {this.state.total}</h1>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={6}>
+                        <Button bsStyle="primary">Save</Button>
                     </Col>
                 </Row>
             </Grid>
@@ -174,7 +215,7 @@ class NewInvoicePage extends React.Component{
 
 export default connect(
     state => ({
-		invoices: state.invoiceReducer,
+		//invoices: state.invoiceReducer,
 		customers: state.customerReducer,
 		products: state.productReducer,
 	})
