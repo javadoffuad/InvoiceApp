@@ -74,12 +74,12 @@ class NewInvoicePage extends React.Component{
 
     updateTotal() {
         var sum = 0;
-        this.state.productsToOrder.map(function(product){
-            sum = sum + product.price * product.qty;
+        this.state.productsToOrder.forEach(function(product){
+            sum += product.price * product.qty;
         });
 
         if(this.state.discount > 0){
-            sum = sum - sum/100 * this.state.discount
+            sum -= sum/100 * this.state.discount
         }
         
         this.setState({
