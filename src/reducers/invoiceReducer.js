@@ -8,5 +8,16 @@ export default function invoiceReducer(
     if(action.type === types.LOAD_INVOICES_SUCCESS){
         return action.invoices;
     }
+    if(action.type === types.CREATE_INVOICE_SUCCESS){
+        return [
+            ...state,
+            Object.assign({}, action.invoice)
+        ]
+    }
+    if(action.type === types.DELETE_INVOICE_SUCCESS){
+        return state.filter(invoice => 
+            invoice.id !== action.invoice.id
+        );
+    }
     return state;
 }

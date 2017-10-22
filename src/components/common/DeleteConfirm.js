@@ -12,7 +12,7 @@ class DeleteConfirm extends React.Component {
                     <p>Are you sure?</p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.props.primaryAction} bsStyle="primary">Save</Button>
+                    <Button onClick={this.props.primaryAction} bsStyle="primary">Yes</Button>
                     <Button onClick={this.props.onHide}>Close</Button>
                 </Modal.Footer>
             </Modal>

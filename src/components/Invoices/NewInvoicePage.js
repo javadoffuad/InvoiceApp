@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import Select from 'react-select';
+import { newInvoice } from '../../actions/invoiceActions';
 
 import { Grid, Row, Col, FormGroup, FormControl, ControlLabel, Button, Table } from 'react-bootstrap';
 
@@ -12,25 +13,30 @@ class NewInvoicePage extends React.Component{
             selectedProduct: '',
             productsToOrder: [],
             total: (0).toFixed(2),
-            discount: ''
+            discount: '',
+            saveButton: {
+                text: 'Save',
+                state: false
+            }
         }
 
-        this.sumTotal = this.sumTotal.bind(this);
+        this.updateTotal = this.updateTotal.bind(this);
+        this.onSave = this.onSave.bind(this);
     }
 
     componentDidMount() {
         document.title = "InvoiceApp | New Invoice";
     }
 
-    updateState(element) {
+    updateSelectedCustomer(customer) {
         this.setState({
-            selectedCustomer: element
+            selectedCustomer: customer
         });
     }
 
-    updateStateProduct(element) {
+    updateSelectedProduct(product) {
         this.setState({
-            selectedProduct: element
+            selectedProduct: product
         });
     }
 
@@ -41,9 +47,7 @@ class NewInvoicePage extends React.Component{
         this.setState({
             productsToOrder: [...this.state.productsToOrder, this.state.selectedProduct],
             selectedProduct: ''
-        }, function(){
-            this.sumTotal();
-        });
+        }, () => this.updateTotal());
     }
 
     setQty (product, e){
@@ -58,26 +62,25 @@ class NewInvoicePage extends React.Component{
         this.setState({
             products: newState
         }, function(){
-            this.sumTotal();
+            this.updateTotal();
         });
     }
 
     updateDiscount(e) {
         this.setState({
             discount: e.target.value
-        },function(){
-            this.sumTotal();
-        });
+        }, () => this.updateTotal());
     }
 
-    sumTotal() {
+    updateTotal() {
         var sum = 0;
         this.state.productsToOrder.map(function(product){
             sum = sum + product.price * product.qty;
         });
-        sum = this.state.discount > 0
-            ? sum - sum/100 * this.state.discount
-            : sum;
+
+        if(this.state.discount > 0){
+            sum = sum - sum/100 * this.state.discount
+        }
         
         this.setState({
             total: sum.toFixed(2)
@@ -91,16 +94,43 @@ class NewInvoicePage extends React.Component{
         
         this.setState({
             productsToOrder: newState
-        }, function(){
-            this.sumTotal();
-        });
+        }, () => this.updateTotal());
+    }
+
+    onSave(event) {
+        if(!this.state.productsToOrder.length || this.state.selectedCustomer == '')
+            return false;
+
+        this.setState({
+            saveButton: {
+                state: true,
+                text: 'Saving...'
+            }
+        })
+
+        this.props.onSaveInvoice({
+            id: this.state.selectedCustomer.value,
+            discount: this.state.discount,
+            total: this.state.total
+        }, response =>
+            this.setState({
+                productsToOrder: [],
+                selectedCustomer: '',
+                discount: '',
+                total: (0).toFixed(2),
+                saveButton: {
+                    state: false,
+                    text: 'Save'
+                }
+            })
+        )
     }
     
     render() {
         var optionsCustomer = [];
         var optionsProduct = []; 
 
-        this.props.customers.forEach(function(item, i) {
+        this.props.customers.forEach(function(item) {
             optionsCustomer.push({
                     value: item.id,
                     label: item.name
@@ -132,7 +162,7 @@ class NewInvoicePage extends React.Component{
                                 type="text"
                                 onChange={this.updateDiscount.bind(this)}
                                 placeholder="Enter discount"
-                                defaultValue={this.state.discount}/>
+                                value={this.state.discount}/>
                         </FormGroup>
                     </Col>
                 </Row>
@@ -141,10 +171,9 @@ class NewInvoicePage extends React.Component{
                     <FormGroup controlId="customer">
                         <ControlLabel>Customer</ControlLabel>
                         <Select
-                            name="form-field-name"
                             value={this.state.selectedCustomer}
                             options={optionsCustomer}
-                            onChange={this.updateState.bind(this)}
+                            onChange={this.updateSelectedCustomer.bind(this)}
                             />
                         </FormGroup>
                     </Col>
@@ -154,10 +183,9 @@ class NewInvoicePage extends React.Component{
                         <FormGroup controlId="product">
                             <ControlLabel>Add product</ControlLabel>
                             <Select
-                                name="form-field-name2"
                                 value={this.state.selectedProduct}
                                 options={optionsProduct}
-                                onChange={this.updateStateProduct.bind(this)}
+                                onChange={this.updateSelectedProduct.bind(this)}
                                 />
                         </FormGroup>
                     </Col>
@@ -205,7 +233,7 @@ class NewInvoicePage extends React.Component{
                 </Row>
                 <Row>
                     <Col md={6}>
-                        <Button bsStyle="primary">Save</Button>
+                        <Button disabled={this.state.saveButton.state} onClick={this.onSave} bsStyle="primary">{this.state.saveButton.text}</Button>
                     </Col>
                 </Row>
             </Grid>
@@ -215,8 +243,14 @@ class NewInvoicePage extends React.Component{
 
 export default connect(
     state => ({
-		//invoices: state.invoiceReducer,
+		invoices: state.invoiceReducer,
 		customers: state.customerReducer,
 		products: state.productReducer,
-	})
+    }),
+    dispatch => ({
+        onSaveInvoice: (invoice, callback) => {
+            dispatch(newInvoice(invoice, callback))
+        }
+        
+    })
 )(NewInvoicePage);
